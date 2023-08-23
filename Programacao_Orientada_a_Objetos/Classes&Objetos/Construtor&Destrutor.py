@@ -9,6 +9,6 @@ class cachorro:
         print("Removendo a instância da classe...")
 
 
-cachorro1= cachorro("Toby","Preto") #quando instanciamos o objeto ele ja roda o INIT 
+cachorro1= cachorro("Toby","Caramelo") #quando instanciamos o objeto ele ja roda o INIT 
 
 del cachorro1 # Removendo a instancia do objeto da memoria 
