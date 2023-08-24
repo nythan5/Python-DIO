@@ -86,8 +86,6 @@ class Conta():
         
         return True
 
-
-
 class ContaCorrente(Conta):
     def __init__(self, numero, cliente,limite = 500, limite_saques = 3):
         super().__init__(numero, cliente)
@@ -120,9 +118,6 @@ class ContaCorrente(Conta):
             Titular:\t{self.cliente.nome}
         """
         
-
-
-
 
 class Historico:
     def __init__(self):
