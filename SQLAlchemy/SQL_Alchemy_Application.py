@@ -1,33 +1,52 @@
-import sqlalchemy
-from sqlalchemy.orm import declarative_base 
+from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import Session
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column 
-from sqlalchemy import *
-from sqlalchemy import 
+from sqlalchemy import Column
+from sqlalchemy import create_engine
+from sqlalchemy import inspect
+from sqlalchemy import select
+from sqlalchemy import func
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import ForeignKey
 
 
 
-Base = declarative_base(
-    "Adress", back_populates = "user" , cascade = "all, delete-orphan"
-    
-)
+
+Base = declarative_base()
 
 
 class User(Base):
-    __table_name__ = "user_account"
-    
-    #atributos
-    id = Column(Integer, primary_key=True,autoincrement=True)
-    name = Column(String, nullable= False)
-    full_name =  Column(String)
-    adress = relationship()
+    """
+        Esta classe representa a tabela user_account dentro
+        do SQlite.
+    """
+    __tablename__ = "user_account"
+    # atributos
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    fullname = Column(String)
 
-    
+    address = relationship(
+        "Address", back_populates="user", cascade="all, delete-orphan"
+    )
 
-class Adress(Base):
-    __table_name__ = "adress"
+    def __repr__(self):
+        return f"User(id={self.id}, name={self.name}, fullname={self.fullname})"
 
-    #atributos
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    email_adress = Column(String(50), nullable= False, unique=True)
-    user_id = Column(Integer,ForeignKey("user_acount.id"), nullable=False)
+
+    """
+        Esta classe representa a tabela user_account dentro
+        do SQlite.
+    """
+
+class Address(Base):
+    __tablename__ = "address"
+    id = Column(Integer, primary_key=True)
+    email_address = Column(String(30), nullable=False)
+    user_id = Column(Integer, ForeignKey("user_account.id"), nullable=False)
+
+    user = relationship("User", back_populates="address")
+
+    def __repr__(self):
+        return f"Address(id={self.id}, email_address={self.email_address})"
