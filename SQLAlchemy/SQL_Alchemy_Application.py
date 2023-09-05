@@ -80,19 +80,26 @@ with Session(engine) as session:
                   Address(email_address="cristianeguimaraes@email.com")]
     )
 
-    ota = User (name= "ota",fullname = "ota ota")
+    fulano = User (name= "Fulano",fullname = "Fulano da Silva Santos")
 
 
 # Para submeter as os registros
-session.add_all([gabriel,cristiane,ota])
+session.add_all([gabriel,cristiane,fulano])
 session.commit()
 
 
 # Recuperando a informações do BD
-stmt_user = select(User).where(User.name.in_(["Gabriel","ota"])) 
+stmt_userg = select(User)
+print("\n","Recuperando Usuário")
+for user in session.scalars(stmt_userg):
+    print(user)
+
+
+stmt_user = select(User).where(User.name.in_(["Gabriel","Fulano"])) 
 print("\n","Recuperando Usuário")
 for user in session.scalars(stmt_user):
     print(user)
+
 
 stmt_address = select(Address).where(Address.user_id.in_([2]))
 print("\n","Recuperando Email usuário Cristiane")
