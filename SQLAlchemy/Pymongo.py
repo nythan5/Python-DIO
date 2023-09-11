@@ -46,7 +46,22 @@ new_posts = [{
         {                 
         "author": "Outra",
         "text": "My third mongodb aplication based on python",
-        "title":"A outra da outra"
+        "title":"A outra da outra",
         "date": datetime.datetime.utcnow()
         }
             ]
+
+result = posts.insert_many(new_posts)
+print("\n Recuperaçando e Alterando informações ")
+pprint.pprint(db.posts.find_one_and_update({"author":"Outra"},
+                                           {'$set':{"author": "Josefina"}}))
+
+
+print("\n")
+pprint.pprint(db.posts.find_one({"author":"Josefina"}))
+
+print("\nPRINTANDO TODOS OS POSTS")
+for post in posts.find():
+    pprint.pprint(post)
+    print("\n")
+
