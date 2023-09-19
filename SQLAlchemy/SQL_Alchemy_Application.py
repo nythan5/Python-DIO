@@ -14,6 +14,7 @@ from sqlalchemy import func
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import ForeignKey
+from sqlalchemy import MetaData
 
 Base = declarative_base()
 
@@ -49,3 +50,14 @@ class Address(Base):
         return f"Address(id={self.id}, email_address={self.email_address})"
 
 
+# Criando Conexão com o SQLITE BD
+engine = create_engine("sqlite://")
+
+
+# Criando as classes como tabela no BD
+Base.metadata.create_all(engine)
+
+# Cara que busca dentro da engine
+inspetor = inspect(engine)
+
+print(inspetor.get_table_names())
