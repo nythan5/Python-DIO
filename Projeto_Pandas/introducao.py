@@ -1,6 +1,9 @@
 import pandas as pd
 
 
+
+
+
 caminho = r"C:\Users\Gabriel Nathan Dias\Desktop\Python\Python-DIO\Projeto_Pandas\Arquivos do Curso Pandas\datasets\D_Gapminder.csv"
 
 df = pd.read_csv(caminho, sep=';') # Colocando o separador por ;
@@ -29,7 +32,10 @@ print(df_oceania["Pais"].unique(),"\n")
 print(df.groupby("Continente")["Pais"].nunique())
 
 # Qual a exp de vida media para cada ano
-print(df.groupby("year")["Exp de Vida"].mean())
+print(df.groupby(["year"])["Exp de Vida"].mean())
+
+# Qual a exp de vida media por ano para cada pais
+print(df.groupby(["Pais", "year"])["Renda Percapta"].mean())
 
 
 
