@@ -19,6 +19,6 @@ def delete_pessoa():
     pessoa.delete()
 
 if __name__ == '__main__':
-    #insert_pessoas()
-    delete_pessoa()
+    insert_pessoas()
+    #delete_pessoa()
     consulta()
